@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediaHub — Social Media Command Center</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="brand-section">
+        <div class="brand-logo-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>
+            MediaHub 
+            <span class="brand-badge">PRO STUDIO</span>
+          </h1>
+          <p class="tagline">Unified social media command center & auto-scheduler</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Live API / Sandbox Connection Pill -->
+        <div class="connection-pill" id="connection-pill" title="Backend connection status">
+          <span class="status-dot"></span>
+          <span id="connection-status-text">Connected API</span>
+        </div>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button class="icon-btn" id="theme-toggle" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="theme-icon-sun" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="layout">
+
+    <!-- KPI Summary Section -->
+    <section class="summary-grid" id="summary">
+      <!-- Accounts Card -->
+      <div class="stat-card accounts">
+        <div class="stat-content">
+          <span class="stat-label">Connected Accounts</span>
+          <span class="stat-num" id="stat-accounts">0</span>
+          <span class="stat-trend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+            Active channels
+          </span>
+        </div>
+        <div class="stat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <line x1="20" y1="8" x2="20" y2="14"></line>
+            <line x1="23" y1="11" x2="17" y2="11"></line>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Drafts Card -->
+      <div class="stat-card drafts">
+        <div class="stat-content">
+          <span class="stat-label">Draft Posts</span>
+          <span class="stat-num" id="stat-draft">0</span>
+          <span class="stat-trend">Ready to refine</span>
+        </div>
+        <div class="stat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Scheduled Card -->
+      <div class="stat-card scheduled">
+        <div class="stat-content">
+          <span class="stat-label">Scheduled Queue</span>
+          <span class="stat-num" id="stat-scheduled">0</span>
+          <span class="stat-trend">Upcoming timed posts</span>
+        </div>
+        <div class="stat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Published Card -->
+      <div class="stat-card published">
+        <div class="stat-content">
+          <span class="stat-label">Published Feed</span>
+          <span class="stat-num" id="stat-published">0</span>
+          <span class="stat-trend">Live across channels</span>
+        </div>
+        <div class="stat-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace 2-Column Grid -->
+    <div class="workspace-grid">
+
+      <!-- Left Column: Channel & Account Management -->
+      <section class="panel" id="accounts-panel">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <span class="panel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <h2>Channels & Accounts</h2>
+          </div>
+          <span class="panel-badge" id="account-count-badge">0 connected</span>
+        </div>
+
+        <div class="panel-body">
+          <form id="account-form" class="stacked-form">
+            <div class="form-group">
+              <label class="form-label" for="account-platform">Target Platform</label>
+              <select id="account-platform" required>
+                <option value="" disabled selected>Select social network...</option>
+                <option value="Twitter/X">Twitter / X</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Facebook">Facebook</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="YouTube">YouTube</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="account-username">Handle / Account Name</label>
+              <div class="input-with-icon">
+                <span class="input-icon-prefix">@</span>
+                <input id="account-username" type="text" placeholder="brand_official" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-secondary btn-block">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Connect Account
+            </button>
+          </form>
+
+          <ul id="account-list" class="account-list"></ul>
+        </div>
+      </section>
+
+      <!-- Right Column: Post Studio & Feed -->
+      <section class="panel wide">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <span class="panel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </span>
+            <h2>Post Studio</h2>
+          </div>
+          <span class="panel-badge">Composer</span>
+        </div>
+
+        <div class="panel-body">
+          <form id="post-form" class="composer-container">
+            <!-- Account Destination Select -->
+            <div class="form-group">
+              <label class="form-label" for="post-account">Publish Destination</label>
+              <select id="post-account" required>
+                <option value="" disabled selected>Choose a connected account...</option>
+              </select>
+            </div>
+
+            <!-- Content Area -->
+            <div class="composer-main">
+              <textarea id="post-content" rows="4" placeholder="What's on your mind? Share updates, links, or media ideas..." required></textarea>
+              
+              <div class="composer-toolbar">
+                <div class="hashtag-chips" id="quick-hashtags">
+                  <span class="chip" data-tag="#launch">#launch</span>
+                  <span class="chip" data-tag="#updates">#updates</span>
+                  <span class="chip" data-tag="#marketing">#marketing</span>
+                  <span class="chip" data-tag="#growth">#growth</span>
+                  <span class="chip" data-tag="#tech">#tech</span>
+                </div>
+                <div class="char-counter" id="char-counter">
+                  <span id="char-count">0</span> / <span id="char-limit">280</span> chars
+                </div>
+              </div>
+            </div>
+
+            <!-- Smart Schedule Controls -->
+            <div class="schedule-section">
+              <label class="form-label">Scheduling & Release</label>
+              <div class="preset-chips" id="schedule-presets">
+                <button type="button" class="preset-chip active" data-preset="draft">Save as Draft</button>
+                <button type="button" class="preset-chip" data-preset="1h">+1 Hour</button>
+                <button type="button" class="preset-chip" data-preset="tomorrow">Tomorrow 9 AM</button>
+                <button type="button" class="preset-chip" data-preset="custom">Custom Date & Time</button>
+              </div>
+
+              <div id="custom-time-container" style="display:none; margin-top: 8px;">
+                <input id="post-time" type="datetime-local">
+              </div>
+            </div>
+
+            <!-- Live Post Preview Accordion -->
+            <div class="preview-accordion">
+              <div class="preview-header" id="preview-toggle">
+                <span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Live Post Preview
+                </span>
+                <span id="preview-platform-indicator" style="color: var(--primary-light);">Twitter / X</span>
+              </div>
+              <div class="preview-body" id="preview-body">
+                <div class="social-mock-card">
+                  <div class="mock-author">
+                    <div class="mock-avatar" id="mock-avatar">M</div>
+                    <div>
+                      <div class="mock-author-name" id="mock-author-name">MediaHub User</div>
+                      <div class="mock-author-handle" id="mock-author-handle">@select_account</div>
+                    </div>
+                  </div>
+                  <div class="mock-content" id="mock-content">Your post content will appear here in real-time...</div>
+                  <div class="mock-footer">
+                    <span id="mock-timestamp">Just now</span>
+                    <div class="mock-stats">
+                      <span class="mock-stat-item">💬 0</span>
+                      <span class="mock-stat-item">🔁 0</span>
+                      <span class="mock-stat-item">❤️ 0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Composer Actions -->
+            <div class="composer-actions">
+              <button type="button" class="btn btn-ghost" id="clear-composer-btn">Clear</button>
+              <button type="submit" class="btn btn-primary" id="submit-post-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>Save Post</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Posts Management Feed Section -->
+          <div class="posts-feed-section">
+            <div class="feed-controls">
+              <div class="tabs-group" id="tabs">
+                <button class="tab-btn active" data-status="">
+                  All Posts <span class="tab-count" id="count-all">0</span>
+                </button>
+                <button class="tab-btn" data-status="draft">
+                  Drafts <span class="tab-count" id="count-draft">0</span>
+                </button>
+                <button class="tab-btn" data-status="scheduled">
+                  Scheduled <span class="tab-count" id="count-scheduled">0</span>
+                </button>
+                <button class="tab-btn" data-status="published">
+                  Published <span class="tab-count" id="count-published">0</span>
+                </button>
+              </div>
+
+              <!-- Search input -->
+              <div class="search-input-wrap">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="post-search" placeholder="Search posts or accounts...">
+              </div>
+            </div>
+
+            <!-- Posts List Feed -->
+            <ul id="post-list" class="post-list"></ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Custom Confirmation Modal -->
+  <div class="modal-backdrop" id="confirm-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon-danger">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-title">Confirm Action</h3>
+      </div>
+      <p class="modal-desc" id="confirm-message">Are you sure you want to proceed?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="confirm-cancel-btn">Cancel</button>
+        <button class="btn btn-primary" id="confirm-ok-btn" style="background: var(--danger); box-shadow: 0 4px 14px var(--danger-bg);">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
