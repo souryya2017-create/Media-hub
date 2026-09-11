@@ -58,3 +58,9 @@ Then visit `http://localhost:8000`.
 | `DELETE` | `/api/posts/<id>`           | Delete a post                            |
 | `POST`   | `/api/posts/<id>/publish`   | Mark a post as published (mock)          |
 | `GET`    | `/api/summary`              | Real-time counts across dashboard        |
+
+# MediaHub — Social Media Command Center
+
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://souryya2017-create.github.io/Media-hub/)
+
+🌐 **Live Dashboard Preview:** https://souryya2017-create.github.io/Media-hub/
